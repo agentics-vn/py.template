@@ -1,0 +1,54 @@
+# Distribution / packaging
+**/*.egg
+**/*.egg-info
+**/*.pyc
+**/.DS_Store
+**/.Python
+**/.eggs
+**/.git
+**/.gitignore
+**/.installed.cfg
+**/.vscode
+**/MANIFEST
+**/__pycache__
+**/build
+**/develop-eggs
+**/dist
+**/downloads
+**/eggs
+**/lib
+**/lib64
+**/logs/
+**/parts
+**/sdist
+**/share/python-wheels
+**/var
+**/wheels
+
+# Docs
+*.md
+docs-site/
+docs/
+
+.editorconfig
+.pre-commit-config.yaml
+.ruff_cache/
+
+# User-specific local development files
+.aider.*
+.cursor/
+.env.backup
+.env.dev
+.vault_pass
+credentials/
+docs/personal/
+examples/
+
+# helper scripts
+scripts/
+dev-run.sh
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose.yml
