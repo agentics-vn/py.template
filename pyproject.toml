@@ -12,3 +12,13 @@ dev = [
     "pytest>=8.3.5",
     "ruff>=0.11.6",
 ]
+
+[tool.ruff]
+exclude = [".git", "*_pb2.py"]
+line-length = 120
+
+[tool.ruff.lint]
+ignore = ["E402"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
