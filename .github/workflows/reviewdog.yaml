@@ -14,5 +14,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           fail_level: error
-          fail_on_error: true
           changed_files: true
