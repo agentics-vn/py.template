@@ -1,0 +1,31 @@
+name: Lint code at PR
+
+on:
+  pull_request:
+    branches:
+      - "staging"
+      - "main"
+
+jobs:
+  ruff-lint:
+    name: Ruff Check with Reviewdog
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Run Ruff with reviewdog
+        uses: reviewdog/action-ruff@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          level: error
