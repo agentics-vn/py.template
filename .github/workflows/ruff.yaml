@@ -21,7 +21,7 @@ jobs:
       - name: Install uv and ruff
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
-          ~/.cargo/bin/uv pip install ruff
+          uv pip install ruff
 
       - name: Run Ruff check
-        run: ~/.cargo/bin/uv run ruff check .
+        run: uv run ruff check .
