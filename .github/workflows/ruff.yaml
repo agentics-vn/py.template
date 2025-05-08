@@ -16,17 +16,19 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
-      - name: Install uv
+      - name: Install uv and reviewdog
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-      - name: Create uv environment and install ruff
-        run: |
           uv venv
-          uv pip install ruff
+          uv pip install 'ruff>=0.1.3'
+          curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b ./bin
 
-      - name: Run Ruff check
-        run: uv run ruff check .
+      - name: Run Ruff and report via reviewdog
+        run: |
+          uv run ruff check . --format=json \
+            | ./bin/reviewdog -f=ruff -name=ruff -reporter=github-pr-review -level=error
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
