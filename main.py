@@ -1,8 +1,11 @@
+from loguru import logger
+
+
 def main():
-    print("Hello from py-template!")
+    logger.info("Hello from py-template!")
 
 
 if __name__ == "__main__":
-    """
-    """
+    import os
+
     main()
