@@ -1,2 +1,6 @@
+def main():
+    print("Hello from py-template!")
 
-def test(builtin: list[str]): ...
+
+if __name__ == "__main__":
+    main()
