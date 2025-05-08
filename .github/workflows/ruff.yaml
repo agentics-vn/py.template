@@ -27,7 +27,7 @@ jobs:
 
       - name: Run Ruff with Reviewdog
         run: |
-          ruff check . --format=github \
+          ruff check . --format=json \
           | ./bin/reviewdog -f=github-pr-review \
               -name="ruff" \
               -reporter=github-pr-review \
