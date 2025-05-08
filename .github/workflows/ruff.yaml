@@ -1,14 +1,12 @@
-name: Ruff Check
+name: Ruff Check (UV)
 
 on:
   pull_request:
     branches:
-      - "main"
-      - "staging"
+      - '**'
 
 jobs:
   ruff:
-    name: Ruff + Reviewdog
     runs-on: ubuntu-latest
 
     steps:
@@ -20,17 +18,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Ruff and Reviewdog
+      - name: Install uv and ruff
         run: |
-          pip install ruff
-          curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b ./bin
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          ~/.cargo/bin/uv pip install ruff
 
-      - name: Run Ruff with Reviewdog
-        run: |
-          ruff check . --format=json \
-          | ./bin/reviewdog -f=github-pr-review \
-              -name="ruff" \
-              -reporter=github-pr-review \
-              -level=error
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run Ruff check
+        run: ~/.cargo/bin/uv run ruff check .
