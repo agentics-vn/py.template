@@ -1,6 +1,4 @@
 def main():
-    a = 1
-
     print("Hello from py-template!")
 
 
