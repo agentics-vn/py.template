@@ -15,4 +15,3 @@ jobs:
           reporter: github-pr-review
           fail_level: error
           changed_files: true
-          ruff_flags: --fix
