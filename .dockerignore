@@ -36,6 +36,7 @@ docs/
 
 # User-specific local development files
 .aider.*
+.claude/
 .cursor/
 .env.backup
 .env.dev
