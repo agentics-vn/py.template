@@ -36,7 +36,7 @@ COPY --from=builder /app /app
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         curl && \
-        ca-certificates \
+        ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
