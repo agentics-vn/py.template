@@ -9,6 +9,7 @@
 **/.gitignore
 **/.installed.cfg
 **/.vscode
+**/.venv
 **/MANIFEST
 **/__pycache__
 **/build
@@ -53,3 +54,10 @@ dev-run.sh
 .dockerignore
 Dockerfile
 docker-compose.yml
+
+# dev
+.local/
+.cursor/
+docs/
+tests/
+caddy/

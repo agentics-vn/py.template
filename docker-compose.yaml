@@ -1,0 +1,39 @@
+services:
+  fastapi:
+    build: .
+    container_name: app-fastapi
+    ports:
+      - "8080:8080"
+    depends_on:
+      redis:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+    volumes:
+      - ./.env:/app/.env
+    restart: unless-stopped
+    networks:
+      - app_network
+
+  caddy:
+    image: caddy:2.10.0-alpine
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - app_network
+    volumes:
+      - ./caddy:/etc/caddy
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  app_network:
+    driver: bridge

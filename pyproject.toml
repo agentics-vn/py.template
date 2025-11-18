@@ -1,16 +1,33 @@
 [project]
-name = "project-name"
+name = "srv.luangiai.vn"
 version = "0.1.0"
-description = "Add your description here"
+description = "luangiai.vn API server"
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = []
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.13.2",
+    "celery>=5.5.3",
+    "crewai>=1.5.0",
+    "fastapi>=0.121.2",
+    "httpx>=0.28.1",
+    "loguru>=0.7.3",
+    "openai>=2.8.1",
+    "python-dotenv>=1.2.1",
+    "pyyaml>=6.0.2",
+    "requests>=2.32.5",
+    "resend>=2.19.0",
+    "uvicorn>=0.38.0",
+]
 
 [dependency-groups]
 dev = [
     "pre-commit>=4.2.0",
     "pytest>=8.3.5",
+    "pytest-asyncio>=1.2.0",
+    "pytest-mock>=3.12.0",
+    "pytest-cov>=7.0.0",
     "ruff>=0.11.6",
+    "tabulate>=0.9.0",
 ]
 
 [tool.ruff]
@@ -22,3 +39,39 @@ ignore = ["E402"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.pyright]
+extraPaths = ["src"]
+include = ["src", "tests"]
+pythonVersion = "3.13"
+reportAssignmentType = false
+venv = ".venv"
+venvPath = "."
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
+    "--color=yes",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "middleware: Middleware tests",
+    "auth: Authentication tests",
+    "webhook: Webhook tests",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+    "ignore:The configuration option \"asyncio_default_fixture_loop_scope\" is unset:pytest.PytestDeprecationWarning:pytest_asyncio",
+    "ignore:coroutine.*was never awaited:RuntimeWarning",
+]

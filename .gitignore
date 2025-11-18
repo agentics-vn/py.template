@@ -172,3 +172,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+.claude/
+CLAUDE.md
+
+# Git worktrees
+.worktrees/

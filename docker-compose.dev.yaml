@@ -1,0 +1,33 @@
+services:
+  fastapi:
+    build: .
+    container_name: dev
+    ports:
+      - "8183:8080"
+    env_file:
+      - .env
+    environment:
+      ENVIRONMENT: "development"
+      LOG_LEVEL: "debug"
+    volumes:
+      # Mount source code for hot-reload (read-only for safety)
+      - ./src:/app/src:ro
+      # Mount data directory for persistence
+      - ./data:/app/data
+    # Override CMD to enable hot-reload in development
+    command: uvicorn server:app --host 0.0.0.0 --port 8080 --reload
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+    restart: unless-stopped
+    networks:
+      - tarot_network
+      - web_network
+
+networks:
+  tarot_network:
+    driver: bridge
+  web_network:
+    external: true
